@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d18">
+<title>HARMAN AI</title>
+<style>
+:root{--bg:#080c16;--panel:#101827;--panel2:#151f31;--line:#26344a;--text:#f4f7ff;--muted:#9eabc0;--accent:#7c5cff;--cyan:#42d6c8;--radius:20px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#20204b 0,transparent 35%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.wrap{max-width:1100px;margin:auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 22px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px;font-size:20px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--cyan));display:grid;place-items:center;color:white;font-weight:900;box-shadow:0 8px 30px #7c5cff44}
+.header-actions{display:flex;gap:8px;align-items:center}.select,.ghost,.primary{border:1px solid var(--line);background:#111a2a;color:var(--text);padding:10px 13px;border-radius:12px}.primary{border:0;background:linear-gradient(135deg,var(--accent),#4a8cff);font-weight:800}.ghost:hover,.select:hover{border-color:#7c5cff}
+.hero{padding:28px 0 24px}.eyebrow{color:var(--cyan);font-size:13px;font-weight:800}.hero h1{font-size:clamp(30px,7vw,54px);line-height:1.2;margin:12px 0}.hero p{color:var(--muted);font-size:16px;line-height:1.9;max-width:680px;margin:0}
+.notice{margin:16px 0 22px;padding:12px 14px;border:1px solid #66522a;background:#2b2415;color:#f3dca7;border-radius:14px;font-size:13px;line-height:1.8}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 13px}.section-title h2{font-size:19px;margin:0}.section-title span{color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:17px;min-height:145px;text-align:right;color:var(--text);transition:.2s}
+.tile:active{transform:scale(.98)}.tile .ico{font-size:25px;margin-bottom:12px}.tile h3{margin:0 0 7px;font-size:16px}.tile p{margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+.tile .tag{display:inline-block;margin-top:12px;color:#bcb1ff;font-size:11px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px;margin-top:16px}
+.chat-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.status{width:9px;height:9px;border-radius:50%;background:#42d6a2;box-shadow:0 0 12px #42d6a2}
+.chatlog{min-height:90px;max-height:230px;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:5px 0 12px}
+.msg{max-width:90%;padding:11px 13px;border-radius:15px;background:#1a263a;color:#eaf0ff;font-size:14px;line-height:1.8;align-self:flex-start}.msg.me{background:#342b69;align-self:flex-end}
+.chatbar{display:flex;gap:8px}.chatbar input{min-width:0;flex:1;background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:12px;color:white;outline:none}
+.feature-panel{display:none}.feature-panel.active{display:block}
+.field{width:100%;background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:12px;color:white;margin:8px 0}
+textarea.field{min-height:90px;resize:vertical}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.muted{color:var(--muted);font-size:13px;line-height:1.8}
+footer{padding:30px 0 18px;color:#74829a;text-align:center;font-size:12px}
+.overlay{position:fixed;inset:0;background:#000a;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.overlay.show{display:flex}.modal{width:min(420px,100%);background:#111a2a;border:1px solid var(--line);border-radius:20px;padding:20px}.modal h2{margin-top:0}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding-top:45px}.tile{min-height:165px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="brand"><div class="logo">H</div><span>HARMAN AI</span></div>
+ <div class="header-actions">
+  <select class="select" id="lang" aria-label="Language"><option value="ku">کوردی</option><option value="ar">العربية</option><option value="en">English</option></select>
+  <button class="ghost" id="loginBtn">چوونەژوورەوە</button>
+ </div>
+</header>
+<main>
+<section class="hero">
+ <div class="eyebrow">یاریدەدەری زیرەکی دەستکرد</div>
+ <h1 id="heroTitle">بەخێربێیت بۆ HARMAN AI</h1>
+ <p id="heroDesc">یاریدەدەری دیجیتاڵی تۆ بۆ فێربوون، نووسین، وەرگێڕان و چارەسەرکردنی کێشەکان. هەموو شتێک لە یەک شوێندا.</p>
+</section>
+<div class="notice" id="notice">ئەمە وەشانی تاقیکارییە. چاتی زیرەک، دەنگ، دروستکردنی وێنە، شوێن و پارەدان تا پەیوەستکردنی خزمەتگوزارییەکان بە تەواوی چالاک نین.</div>
+<div class="section-title"><h2 id="toolsTitle">ئامرازەکان</h2><span>HARMAN AI</span></div>
+<div class="grid">
+ <button class="tile" data-panel="chat"><div class="ico">🤖</div><h3>چاتی زیرەک</h3><p>پرسیار بکە و وەڵامی تاقیکاری وەربگرە.</p><span class="tag">پێشبینییەکی سەرەتایی</span></button>
+ <button class="tile" data-panel="voice"><div class="ico">🎙️</div><h3>یاریدەدەری دەنگی</h3><p>بۆ قسەکردن و وەڵامدانەوەی دەنگی.</p><span class="tag">پێویستی بە پەیوەستکردن هەیە</span></button>
+ <button class="tile" data-panel="image"><div class="ico">🎨</div><h3>دروستکردنی وێنە</h3><p>بیرۆکەکانت بکە بە وێنە.</p><span class="tag">پێویستی بە API هەیە</span></button>
+ <button class="tile" data-panel="writing"><div class="ico">✍️</div><h3>نووسین و وەرگێڕان</h3><p>یارمەتی لە نووسین و وەرگێڕانی دەق.</p><span class="tag">نموونەی ڕووکار</span></button>
+ <button class="tile" data-panel="car"><div class="ico">🚗</div><h3>Smart Car Doctor</h3><p>ڕێنمایی سەرەتایی بۆ کێشەکانی ئۆتۆمبێل.</p><span class="tag">ڕاوێژکاری، نەک چاککردنەوەی فیزیکی</span></button>
+ <button class="tile" data-panel="phone"><div class="ico">📱</div><h3>Smart Phone Doctor</h3><p>یارمەتی بۆ باتری، شارژ، ئینتەرنێت و کارایی.</p><span class="tag">ڕێنمایی سەرەتایی</span></button>
+ <button class="tile" data-panel="location"><div class="ico">📍</div><h3>هاوبەشکردنی شوێن</h3><p>ناردنی شوێن بە ڕەزامەندی خۆت.</p><span class="tag">پێویستی بە مۆڵەتی بەکارهێنەر هەیە</span></button>
+ <button class="tile" data-panel="plans"><div class="ico">⭐</div><h3>Free و Premium</h3><p>بینینی پلانی بەکارهێنان.</p><span class="tag">پارەدان هێشتا پەیوەست نییە</span></button>
+ <button class="tile" data-panel="admin"><div class="ico">🛡️</div><h3>بەشی بەڕێوەبەر</h3><p>ڕووکاری بەڕێوەبردنی پڕۆژە.</p><span class="tag">نموونەی ڕووکار</span></button>
+</div>
+
+<section class="panel feature-panel active" id="chat">
+ <div class="chat-head"><span class="status"></span><strong>چاتی HARMAN AI</strong></div>
+ <div class="chatlog" id="chatlog"><div class="msg">سڵاو! من ڕووکاری تاقیکاری HARMAN AI ـم. پرسیارێک بنووسە.</div></div>
+ <div class="chatbar"><input id="chatInput" placeholder="پرسیارەکەت بنووسە..." /><button class="primary" id="sendBtn">ناردن</button></div>
+ <p class="muted">ئەم وەڵامانە تاقیکارین؛ هێشتا بە مۆدێلی AI ڕاستەقینە نەبەستراوم.</p>
+</section>
+<section class="panel feature-panel" id="voice"><h2>🎙️ یاریدەدەری دەنگی</h2><p class="muted">دوای پەیوەستکردنی خزمەتگوزاری ناسینەوەی دەنگ و خوێندنەوەی دەق، قسەکردن بە کوردی چالاک دەکرێت.</p><button class="ghost" disabled>دەنگ هێشتا چالاک نییە</button></section>
+<section class="panel feature-panel" id="image"><h2>🎨 دروستکردنی وێنە</h2><textarea class="field" placeholder="وەسفی وێنەکەت بنووسە..."></textarea><button class="ghost" disabled>خزمەتگوزاری وێنە پەیوەست نییە</button></section>
+<section class="panel feature-panel" id="writing"><h2>✍️ نووسین و وەرگێڕان</h2><textarea class="field" id="writingText" placeholder="دەقەکەت لێرە دابنێ..."></textarea><div class="actions"><button class="ghost" id="copyText">کۆپیکردنی دەق</button><button class="ghost" id="clearText">پاککردنەوە</button></div><p class="muted">ئەم بەشە وەک ڕووکاری ئامادەیە؛ بۆ نووسین و وەرگێڕانی زیرەک پێویستی بە AI API هەیە.</p></section>
+<section class="panel feature-panel" id="car"><h2>🚗 Smart Car Doctor</h2><textarea class="field" placeholder="جۆری ئۆتۆمبێل و نیشانەی کێشەکە بنووسە..."></textarea><p class="muted">بۆ پشکنینی کۆدی هەڵە پێویستی بە ئامێری OBD2 هەیە. ئەگەر بریک، فەرمان یان کێشەیەکی مەترسیدار هەیە، ئۆتۆمبێلەکە مەخە کار و پەیوەندی بە میکانیکی پسپۆڕەوە بکە.</p></section>
+<section class="panel feature-panel" id="phone"><h2>📱 Smart Phone Doctor</h2><textarea class="field" placeholder="کێشەی مۆبایلەکەت بنووسە؛ وەک باتری، شارژ یان Wi-Fi..."></textarea><p class="muted">ئەم بەشە ڕێنمایی دەدات؛ ناتوانێت بەخۆی پارچەی مۆبایل چاک بکات یان هەموو کێشەکان لە دوورەوە پشکنین بکات.</p></section>
+<section class="panel feature-panel" id="location"><h2>📍 هاوبەشکردنی شوێن</h2><p class="muted">شوێن تەنها بە مۆڵەتی ڕوونی خاوەن ئامێر بەکاردێت. هیچ شوێنێک بە تەنها ژمارەی مۆبایل و بەبێ ڕەزامەندی نادۆزرێتەوە.</p><button class="ghost" id="locBtn">داواکردنی مۆڵەتی شوێن</button><p class="muted" id="locResult"></p></section>
+<section class="panel feature-panel" id="plans"><h2>⭐ پلانەکان</h2><div class="grid"><div class="tile"><h3>Free</h3><p>دەستگەیشتنی سەرەتایی بە سنووری بەکارهێنان.</p></div><div class="tile"><h3>Premium</h3><p>تایبەتمەندی زیاتر دوای پەیوەستکردنی سیستەمی پارەدان.</p></div></div><p class="muted">هیچ پارەدانێک لەم نموونەیەدا چالاک نییە.</p></section>
+<section class="panel feature-panel" id="admin"><h2>🛡️ داشبۆردی بەڕێوەبەر</h2><p class="muted">ئەمە تەنها نموونەی ڕووکارە. پێویستی بە سیستەمی چوونەژوورەوە و ڕۆڵی بەڕێوەبەر لە سێرڤەرەوە هەیە؛ ئەم پەڕەیە بە تەنها پاراستنی بەڕێوەبەر دابین ناکات.</p><button class="ghost" id="adminInfo">زانیاریی زیاتر</button></section>
+</main>
+<footer>© 2026 HARMAN AI · وەشانی تاقیکاری</footer>
+</div>
+<div class="overlay" id="overlay"><div class="modal"><h2>چوونەژوورەوە</h2><p class="muted">ئەمە ڕووکاری نموونەیە؛ هەژمارەکان هێشتا پەیوەست نەکراون.</p><input class="field" placeholder="ئیمەیڵ" type="email"><input class="field" placeholder="وشەی نهێنی" type="password"><div class="actions"><button class="primary" id="modalClose">داخستن</button></div></div></div>
+<script>
+const panels=[...document.querySelectorAll('.feature-panel')];
+document.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>{panels.forEach(p=>p.classList.toggle('active',p.id===b.dataset.panel));document.getElementById(b.dataset.panel).scrollIntoView({behavior:'smooth',block:'nearest'})}));
+const log=document.getElementById('chatlog'),input=document.getElementById('chatInput');
+function send(){let v=input.value.trim();if(!v)return;let m=document.createElement('div');m.className='msg me';m.textContent=v;log.appendChild(m);let r=document.createElement('div');r.className='msg';r.textContent='سوپاس بۆ پرسیارەکەت. ئەمە وەشانی تاقیکارییە و هێشتا بە مۆدێلی AI نەبەستراوم. دوای پەیوەستکردنی خزمەتگوزاری AI وەڵامی زیرەک دەدەمەوە.';log.appendChild(r);input.value='';log.scrollTop=log.scrollHeight}
+document.getElementById('sendBtn').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+document.getElementById('loginBtn').onclick=()=>document.getElementById('overlay').classList.add('show');
+document.getElementById('modalClose').onclick=()=>document.getElementById('overlay').classList.remove('show');
+document.getElementById('copyText').onclick=()=>{let t=document.getElementById('writingText');t.select();document.execCommand('copy')};
+document.getElementById('clearText').onclick=()=>document.getElementById('writingText').value='';
+document.getElementById('locBtn').onclick=()=>{let out=document.getElementById('locResult');if(!navigator.geolocation){out.textContent='ئەم وێبگەڕە پشتگیری شوێن ناکات.';return}out.textContent='چاوەڕێی مۆڵەت بە...';navigator.geolocation.getCurrentPosition(p=>out.textContent='شوێنی ئامێر بە مۆڵەتی تۆ وەرگیرا: '+p.coords.latitude.toFixed(4)+', '+p.coords.longitude.toFixed(4)+' (تەنها لەسەر ئەم ئامێرە پیشان دەدرێت).',()=>out.textContent='مۆڵەت نەدرا یان شوێن بەردەست نییە.')};
+document.getElementById('adminInfo').onclick=()=>alert('بۆ بەڕێوەبەری ڕاستەقینە پێویستە چوونەژوورەوەی پارێزراو و پشتەوەی سێرڤەر زیاد بکرێت.');
+const translations={ku:{title:'بەخێربێیت بۆ HARMAN AI',desc:'یاریدەدەری دیجیتاڵی تۆ بۆ فێربوون، نووسین، وەرگێڕان و چارەسەرکردنی کێشەکان. هەموو شتێک لە یەک شوێندا.',tools:'ئامرازەکان',notice:'ئەمە وەشانی تاقیکارییە. چاتی زیرەک، دەنگ، دروستکردنی وێنە، شوێن و پارەدان تا پەیوەستکردنی خزمەتگوزارییەکان بە تەواوی چالاک نین.',dir:'rtl'},en:{title:'Welcome to HARMAN AI',desc:'Your digital assistant for learning, writing, translation and troubleshooting — all in one place.',tools:'Tools',notice:'This is a prototype. AI chat, voice, image generation, location sharing and payments are not fully active until their services are connected.',dir:'ltr'},ar:{title:'مرحباً بك في HARMAN AI',desc:'مساعدك الرقمي للتعلم والكتابة والترجمة وحل المشكلات، كل ذلك في مكان واحد.',tools:'الأدوات',notice:'هذه نسخة تجريبية. الدردشة الذكية والصوت وإنشاء الصور ومشاركة الموقع والدفع غير مفعّلة بالكامل حتى ربط الخدمات المطلوبة.',dir:'rtl'}};
+document.getElementById('lang').onchange=e=>{let t=translations[e.target.value];document.documentElement.dir=t.dir;document.getElementById('heroTitle').textContent=t.title;document.getElementById('heroDesc').textContent=t.desc;document.getElementById('toolsTitle').textContent=t.tools;document.getElementById('notice').textContent=t.notice};
+</script>
+</body></html>
